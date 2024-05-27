@@ -94,12 +94,12 @@ export const customerColumns = [
 
 export const ShippingColumns = [
   {
-    field: "customer._id", // Adjusted field path
+    field: "customerName", // Adjusted field path
     headerName: "Customer",
     width: 100,
   },
   {
-    field: "product",
+    field: "productName",
     headerName: "Product",
     width: 300,
   },

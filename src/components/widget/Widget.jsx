@@ -5,10 +5,10 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 
-const Widget = ({ type, count }) => {
+const Widget = ({ type, count, per }) => {
   let data;
   const amount = count || 100;
-  const diff = 20;
+  const diff = per;
 
   switch (type) {
     case "Customers":
@@ -81,7 +81,7 @@ const Widget = ({ type, count }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "RS"} {amount}
         </span>
         <span className="link">{data.link}</span>
       </div>

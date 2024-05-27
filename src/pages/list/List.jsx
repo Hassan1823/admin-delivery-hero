@@ -9,14 +9,13 @@ import { toast } from "react-toastify";
 const List = ({ columns }) => {
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   const getAllUsers = async () => {
     try {
       setIsLoading(true);
       const user = JSON.parse(localStorage.getItem("user"));
-      const response = await fetch(
-        `${backendLink}/api/auth/getAllUsers/${user?._id}`
-      );
+      const response = await fetch(`${backendLink}/api/auth/getAllUsers`);
       if (!response.ok) {
         toast.error("Something Went Wrong");
       } else {
@@ -35,11 +34,43 @@ const List = ({ columns }) => {
     }
   }, [userData]);
 
+  useEffect(() => {
+    const searchProducts = async () => {
+      try {
+        const response = await fetch(`${backendLink}/api/auth/searchUser`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: searchValue,
+          }),
+        });
+
+        if (!response.ok) {
+          // toast.error("Something went wrong");
+          getAllUsers();
+        } else {
+          const res = await response.json();
+          console.log(res);
+          setUserData(res.data);
+        }
+      } catch (error) {
+        console.Console.log(error);
+      }
+    };
+    if (searchValue && searchValue !== "") {
+      searchProducts();
+    }
+  }, [searchValue]);
+
+  console.log("searchValue :::", searchValue);
+
   return (
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar setSearchValue={setSearchValue} />
         <Datatable
           columns={columns}
           userData={userData}

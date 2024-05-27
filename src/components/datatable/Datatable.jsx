@@ -52,18 +52,18 @@ const Datatable = ({ columns, userData, isLoading, refetch, setIsLoading }) => {
         return (
           <div className="cellAction">
             {/* user id will pass here to new page  */}
-            <Link
+            {/* <Link
               to={`/users/${params?.id}`}
               style={{ textDecoration: "none" }}
             >
               <div className="viewButton">View</div>
-            </Link>
-            <div
+            </Link> */}
+            {/* <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
               Delete
-            </div>
+            </div> */}
           </div>
         );
       },
@@ -77,15 +77,15 @@ const Datatable = ({ columns, userData, isLoading, refetch, setIsLoading }) => {
         <div className="datatable">
           <div className="datatableTitle">
             {path}
-            <Link to={`/${path}/new`} className="link">
+            {/* <Link to={`/${path}/new`} className="link">
               Add New
-            </Link>
+            </Link> */}
           </div>
           {list ? (
             <DataGrid
               className="datagrid"
               rows={list}
-              columns={columns.concat(actionColumn)}
+              columns={columns.concat()}
               pageSize={9}
               rowsPerPageOptions={[9]}
               checkboxSelection
