@@ -20,6 +20,7 @@ const Home = () => {
   const [shippingToday, setShippingsToday] = useState(0);
   const [shippingTotal, setShippingsTotal] = useState(0);
   const [sixMonthData, setSixMonthData] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -310,13 +311,13 @@ const Home = () => {
     }
   }, [customersData, productsData, shippingsData]);
 
-  // const { data, loading } = useFetch("/customer/countcustomers");
+  const { data, loading } = useFetch("/customer/countcustomers");
 
   return (
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
-        <Navbar />
+        <Navbar setSearchValue={setSearchValue} />
         <div className="widgets">
           <Widget
             type="Customers"
@@ -326,23 +327,23 @@ const Home = () => {
           <Widget
             type="Products"
             count={productsData.length || 67}
-            per={productPer}
+            per={productPer || 0}
           />
           <Widget
             type="Shipment"
             count={shippingsData.length || 67}
-            per={shippingPer}
+            per={shippingPer || 0}
           />
           <Widget
             type="balance"
-            count={shippingToday || shippingTotal}
+            count={shippingToday || shippingTotal || 0}
             per={7}
           />
         </div>
         <div className="charts">
-          <Featured total={shippingTotal} />
+          <Featured total={shippingTotal || 0} />
           <Chart
-            revenue={sixMonthData}
+            // revenue={sixMonthData}
             title="Last 6 Months (Revenue)"
             aspect={2 / 1}
           />
